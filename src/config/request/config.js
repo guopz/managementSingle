@@ -5,8 +5,6 @@ let USERID;
 let BASEAD;
 let BASE;
 
-// export let baseURL = `${BASEAD}/app/mock/${USERID}`;
-
 let { NODE_ENV } = process.env;
 if (NODE_ENV === "development") {
   USERID = '251297';
@@ -20,5 +18,3 @@ else {
 }
 
 export let baseURL = BASE;
-
-console.log(process.env);
