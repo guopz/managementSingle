@@ -5,7 +5,7 @@
 4. ...
 
 ## 预览
-![效果图片](https://github.com/guopz/managementSingle/blob/maste/public/preview.jpg)
+![效果图片](https://github.com/guopz/managementSingle/blob/master/public/preview.jpg?raw=true)
 
 
 ## Project setup
