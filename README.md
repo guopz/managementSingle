@@ -4,6 +4,10 @@
 3. 麻雀虽小，五脏俱全；
 4. ...
 
+## 预览
+![效果图片](https://github.com/guopz/managementSingle/blob/maste/public/preview.jpg)
+
+
 ## Project setup
 ```
 npm install
