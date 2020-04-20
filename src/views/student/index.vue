@@ -80,7 +80,6 @@ export default {
           })
             .then(() => {
               setTimeout(() => {
-                // this.$message.success('新建成功');
                 this.$store.commit('student/DATA_LIST_DELETE', item.row);
               }, 100);
               this.$message({

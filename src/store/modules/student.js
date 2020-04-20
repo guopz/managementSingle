@@ -37,7 +37,6 @@ const student = {
       let { content } = state.dataList;
       let index = _.findIndex(content, function(item) { return item.id == payload.id; });
       content.splice(index, 1, payload);
-      // console.log('初始化数据 ==>', payload, index, totalCount);
     }
   },
   actions: {

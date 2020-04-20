@@ -23,9 +23,6 @@ export default {
     SiderBar,
     SiderLogo,
     TopBar
-  },
-  mounted() {
-    console.log(this.$route);
   }
 };
 </script>

@@ -2,23 +2,6 @@
   <div v-if="formList.length">
     <el-dialog :title="formTitle" :visible.sync="formVisible" width="40%">
       <el-form ref="formDialog" :model="formItem" :rules="rules">
-        <!-- <template v-for="(item, index) in formList">
-          <el-form-item
-            :key="index"
-            :label="item.name"
-            :label-width="formLabelWidth"
-            :rules="item.rules"
-          >
-            <el-input
-              size="small"
-              :placeholder="item.placeholder"
-              :prop="'formList.' + index + '.prop'"
-              class="u-input"
-              v-model="formItem[item.prop]"
-              autocomplete="off"
-            ></el-input>
-          </el-form-item>
-        </template>-->
         <el-form-item :label-width="formLabelWidth" label="姓名" prop="name">
           <el-input size="small" class="u-input" v-model="formItem.name"></el-input>
         </el-form-item>
@@ -85,7 +68,6 @@ export default {
   },
   methods: {
     open({ row = {}, title = "编辑" }) {
-      console.log("formList ==>", this.formList, this.rules);
       this.formVisible = true;
       this.formItem = row;
       this.formTitle = title;
@@ -105,7 +87,6 @@ export default {
       });
     },
     _addStudentList() {
-      // console.log('新曾数据 ==>', this.formItem, this);
       this.formVisible = false;
       this.$message.success('新建成功');
       setTimeout(() => {
@@ -115,7 +96,6 @@ export default {
     _editSudentList() {
       this.formVisible = false;
       this.$message.success('更新成功');
-      // console.log('编辑数据1 ==>', this.formItem, this);
       setTimeout(() => {
         this.$store.commit('student/DATA_LIST_UPDATA', this.formItem);
       }, 500);
