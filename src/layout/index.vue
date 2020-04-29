@@ -1,6 +1,6 @@
 <template>
   <div class="contaienr">
-    <div class="g-menu-left">
+    <div :class="['g-menu-left',!sideFlag?'':'u-fwidth']">
       <sider-logo />
       <sider-bar />
     </div>
@@ -14,15 +14,20 @@
 </template>
 
 <script>
-import SiderLogo from "./SiderBar/logo";
-import SiderBar from "./SiderBar";
-import TopBar from './TopBar';
+import SiderLogo from "./components/TopBar/logo";
+import SiderBar from "./components/SiderBar";
+import TopBar from "./components/TopBar";
 export default {
   name: "Layout",
   components: {
     SiderBar,
     SiderLogo,
     TopBar
+  },
+  computed: {
+    sideFlag() {
+      return this.$store.state.gloabl.sideFlag;
+    }
   }
 };
 </script>
@@ -31,18 +36,19 @@ export default {
 .contaienr {
   height: 100%;
   width: 100%;
-  // display: flex;
   .g-menu-left {
     float: left;
-    width: 220px;
+    width: 200px;
     height: 100%;
     background-color: #545c64;
     overflow: hidden;
+    transition: all .3s;
+    &.u-fwidth {
+      width: 60px;;
+    }
   }
   .g-menu-right {
-    // flex: 1;
     height: 100%;
-    // width: 100%;
     display: flex;
     flex-direction: column;
     .m-main {

@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 import theTable from "./commons/theTable";
 import thePagination from "./commons/thePagination";
 import theDialog from "./commons/theDialog";
@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      atStudentList: 'student/getStudentList'
+      atStudentList: "student/getStudentList"
     }),
     loadData() {
       // Get data
@@ -57,7 +57,6 @@ export default {
         };
         let result = await this.atStudentList(params);
         // Init Data
-        // let doc = _.cloneDeep(result);
         this.tableData = result.content;
         this.totalCount = result.totalCount;
         this.pageSize = result.pageSize;
@@ -80,15 +79,14 @@ export default {
           })
             .then(() => {
               setTimeout(() => {
-                this.$store.commit('student/DATA_LIST_DELETE', item.row);
+                this.$store.commit("student/DATA_LIST_DELETE", item.row);
               }, 100);
               this.$message({
                 type: "success",
                 message: "删除成功!"
               });
             })
-            .catch(() => {
-            });
+            .catch(() => {});
           break;
       }
     },
@@ -97,7 +95,12 @@ export default {
     },
     handleDeleteUser() {
       let result = this.multipleSelection.map(item => item.name);
-      this.$message.error("稍后删除 " + result.join("/"));
+      console.log(result);
+      if (result.length > 0)
+        this.$message.error("稍后删除 " + result.join("/"));
+      else {
+        this.$message('未选择');
+      }
       // this.$store.commit('student/DATA_LIST_DELETEMORE', this.multipleSelection);
     },
     compHandleDeleteRow(val) {
@@ -106,12 +109,6 @@ export default {
     initExtra() {
       this.tabelColumns = student;
       this.tabelRules = rules;
-    }
-  },
-  computed: {
-    headClass() {
-      // return "background:#eef1f6;";
-      return {};
     }
   },
   mounted() {
@@ -143,10 +140,4 @@ export default {
 .m-dialog {
   font-size: 14px;
 }
-.u-input {
-  width: 300px;
-}
-// .el-form-item {
-//   margin-bottom: 10px;
-// }
 </style>

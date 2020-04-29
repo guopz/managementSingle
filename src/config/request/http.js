@@ -1,4 +1,6 @@
 import axios from 'axios';
+import store from '@/store';
+import { getToken } from '@/utils/auth';
 import { Message } from 'element-ui';
 import { baseURL } from './config';
 
@@ -17,7 +19,10 @@ request.interceptors.request.use(
     if (Object.prototype.toString.call(config.data) === '[object FormData]') {
       config.headers["Content-Type"] = "multipart/form-data;charset=utf-8"
     }
-    return config
+    // Token
+    let token = getToken();
+    if (token) config.headers["token"] = token;
+    return config;
   },
   error => {
     Promise.reject(error)
@@ -37,10 +42,15 @@ request.interceptors.response.use(
       return data;
     } else {
       Message({
-        message,
+        message: '服务器未响应',
         type: 'error',
         duration: 3.5 * 1000
       });
+      // 根据状态码 Todo
+      store.dispatch('user/loginOut').then(() => {
+        // location.reload();
+      });
+
       return Promise.reject(message || 'error');
     }
   },

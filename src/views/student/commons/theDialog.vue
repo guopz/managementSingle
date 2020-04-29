@@ -1,31 +1,11 @@
 <template>
-  <div v-if="formList.length">
+  <div>
     <el-dialog :title="formTitle" :visible.sync="formVisible" width="40%">
-      <el-form ref="formDialog" :model="formItem" :rules="rules">
-        <el-form-item :label-width="formLabelWidth" label="姓名" prop="name">
-          <el-input size="small" class="u-input" v-model="formItem.name"></el-input>
-        </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label="性别" prop="sex">
-          <el-input size="small" class="u-input" v-model="formItem.sex"></el-input>
-        </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label="年龄" prop="age">
-          <el-input size="small" class="u-input" v-model="formItem.age"></el-input>
-        </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label="班级" prop="grade">
-          <el-input size="small" class="u-input" v-model="formItem.grade"></el-input>
-        </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label="入学日期" prop="date">
-          <el-input size="small" class="u-input" v-model="formItem.date"></el-input>
-        </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label="专业" prop="major">
-          <el-input size="small" class="u-input" v-model="formItem.major"></el-input>
-        </el-form-item>
-        <el-form-item :label-width="formLabelWidth" label="地址" prop="address">
-          <el-input size="small" class="u-input" v-model="formItem.address"></el-input>
-        </el-form-item>
-      </el-form>
+      <!-- From Item -->
+      <the-form ref="formDialog" :columns="formList" :default-data="formItem" />
+      <!-- Button -->
       <div slot="footer" class="dialog-footer">
-        <el-button size="small" @click="formVisible = false">取 消</el-button>
+        <el-button size="small" @click="handleCancel">取 消</el-button>
         <el-button size="small" type="primary" @click="handleSave">确 定</el-button>
       </div>
     </el-dialog>
@@ -33,6 +13,7 @@
 </template>
 
 <script>
+import theForm from "./theForm";
 export default {
   name: "TheDialog",
   data() {
@@ -40,15 +21,7 @@ export default {
       formVisible: false,
       formLabelWidth: "120px",
       formList: [],
-      formItem: {
-        date: "",
-        name: "",
-        sex: "",
-        age: 0,
-        grade: 0,
-        major: "",
-        address: ""
-      },
+      formItem: {},
       formTitle: ""
     };
   },
@@ -63,47 +36,58 @@ export default {
   },
   computed: {
     newCreate() {
-      return this.formTitle === '新增';
+      return this.formTitle === "新增";
     }
   },
   methods: {
     open({ row = {}, title = "编辑" }) {
       this.formVisible = true;
-      this.formItem = row;
+      this.formItem = Object.assign({}, row);
       this.formTitle = title;
     },
     handleSave() {
-      this.$refs["formDialog"].validate(valid => {
-        if (valid) {
-          if(this.newCreate) {
-            this._addStudentList()
-          } else {
-            this._editSudentList();
-          }
+      this.$refs["formDialog"].handleAsyncSubmit().then(res => {
+        if (this.newCreate) {
+          this._addStudentList(res);
         } else {
-          console.log("error submit!!");
-          return false;
+          this._editSudentList(res);
         }
+        this.formVisible = false;
       });
     },
-    _addStudentList() {
+    handleCancel() {
       this.formVisible = false;
-      this.$message.success('新建成功');
+      this.$refs["formDialog"].handleCanel();
+    },
+    _addStudentList(res) {
+      this.$message.success("新建成功");
+      console.log("this.formItem ==>", res);
       setTimeout(() => {
-        this.$store.commit('student/DATA_LIST_ADD', this.formItem);
+        this.$store.commit("student/DATA_LIST_ADD", res);
       }, 500);
     },
-    _editSudentList() {
-      this.formVisible = false;
-      this.$message.success('更新成功');
+    _editSudentList(res) {
+      this.$message.success("更新成功");
       setTimeout(() => {
-        this.$store.commit('student/DATA_LIST_UPDATA', this.formItem);
+        this.$store.commit("student/DATA_LIST_UPDATA", res);
       }, 500);
     },
+    _dealFormItem(val) {
+      // 处理配置字段获取配置对象
+      let result = {};
+      val && val.forEach(item => {
+        result[item.prop] = item.default || '';
+      });
+      this.formList = [...val];
+      this.formItem = result;
+    }
+  },
+  components: {
+    theForm
   },
   watch: {
     dialogColumns(nv) {
-      this.formList = nv;
+      this._dealFormItem(nv);
     }
   }
 };
