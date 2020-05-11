@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import store from '@/store';
 import AuthControl from '@/components/YeMixins/AuthControl';
 
 const inject = (needAuth = true) => {
@@ -9,6 +10,7 @@ const inject = (needAuth = true) => {
     //若不需要权限控制,则请求任何权限判断都将返回true;
     Vue.mixin(MockAuths);
   }
+  store.commit('auth/UPDATE_ROUTER_INIT', needAuth);
 };
 
 const MockAuths = {

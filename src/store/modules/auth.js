@@ -1,10 +1,11 @@
-import { DATA_LIST_INIT } from '../mutationTypes/auth';
+import { DATA_LIST_INIT, UPDATE_ROUTER_INIT } from '../mutationTypes/auth';
 import * as ApiAuth from '@/api/global/auth';
 const auth = {
   namespaced: true,
   state: {
     userAuths: {},
-    userAuthsReady: false
+    userAuthsReady: false,
+    needAuthRouter: true
   },
   getters: {
     getUserAuths(state) {
@@ -15,6 +16,9 @@ const auth = {
     [DATA_LIST_INIT](state, params) {
       state.userAuths = params;
       state.userAuthsReady = true;
+    },
+    [UPDATE_ROUTER_INIT](state, params) {
+      state.needAuthRouter = params;
     }
   },
   actions: {

@@ -16,7 +16,7 @@ Vue.use(Ye, { locale });
 Vue.config.productionTip = false;
 
 // 权限控制开关
-inject();
+inject(false);
 
 var vm = new Vue({
   router,

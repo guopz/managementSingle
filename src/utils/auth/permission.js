@@ -37,14 +37,17 @@ router.beforeEach((to, from, next) => {
 });
 
 const judgeCanApproach = (to, next) => {
-  if (
+  console.log(!store.state.auth.needAuthRouter);
+  if (!store.state.auth.needAuthRouter) {
+    next();
+  } else if (
     (to.meta.auth && store.state.auth.userAuths[to.meta.auth]) ||
     !to.meta.auth
   ) {
     next();
   } else {
     console.log('检测到没有权限的路由 ==>', to);
-    //TODO 没有权限路由应跳转到404页面,后续增加
+    //TODO 没有权限路由应跳转到403页面,后续增加
     next({ path: '/404' });
   }
 };
