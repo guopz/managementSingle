@@ -16,7 +16,6 @@
 
 <script>
 import theFormItem from "./theFormItem";
-// import FormHandler from './FormHandler'
 export default {
   name: "TheForm",
   props: {

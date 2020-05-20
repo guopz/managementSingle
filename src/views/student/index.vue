@@ -22,8 +22,8 @@
 
 <script>
 import { mapActions } from "vuex";
-import theTable from "./commons/theTable";
-import thePagination from "./commons/thePagination";
+import theTable from "./commons/GhTable/theTable";
+import thePagination from "./commons/GhTable/thePagination";
 import theDialog from "./commons/theDialog";
 import { student, rules } from "./template";
 import _ from "lodash";
@@ -98,7 +98,7 @@ export default {
       if (result.length > 0)
         this.$message.error("稍后删除 " + result.join("/"));
       else {
-        this.$message('未选择');
+        this.$message("未选择");
       }
       // this.$store.commit('student/DATA_LIST_DELETEMORE', this.multipleSelection);
     },

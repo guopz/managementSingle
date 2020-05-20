@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import theForm from "./theForm";
+import theForm from "./GhForm/theForm";
 export default {
   name: "TheDialog",
   data() {
