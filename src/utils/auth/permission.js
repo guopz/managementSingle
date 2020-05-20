@@ -5,6 +5,7 @@ import 'nprogress/nprogress.css';
 import { getToken } from '@/utils/auth';
 
 const whiteList = ['/login'];
+const otherList = ['/sub'];
 
 router.beforeEach((to, from, next) => {
   NProgress.start();
@@ -37,7 +38,17 @@ router.beforeEach((to, from, next) => {
 });
 
 const judgeCanApproach = (to, next) => {
-  console.log(!store.state.auth.needAuthRouter);
+  // if(otherList.includes(to.path)) {
+  //   let routeData = router.resolve({
+  //     path: to.path,
+  //     query: {
+  //       name: "Hi",
+  //       age: 18,
+  //       phoneNum: 12345678901
+  //     }
+  //   });
+  //   window.open(routeData.href, "_blank");
+  // }
   if (!store.state.auth.needAuthRouter) {
     next();
   } else if (

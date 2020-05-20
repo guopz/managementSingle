@@ -31,7 +31,7 @@ export default {
           return this.getAuthorizedRoute(routes[i].children);
         }
       }
-      console.log("routes ==>", routes);
+      // console.log("routes ==>", routes);
       return routes;
     },
     sideFlag() {
@@ -40,6 +40,7 @@ export default {
   },
   methods: {
     getAuthorizedRoute(routes) {
+      // console.log('开始操作 ==>');
       return routes.filter(child => {
         if (child.children) {
           child.children = this.getAuthorizedRoute(child.children);

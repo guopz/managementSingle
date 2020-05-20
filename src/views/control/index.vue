@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="control">
     权限控制
     <item />
   </div>
@@ -15,10 +15,19 @@ export default {
   },
   components: {
     item
+  },
+  beforeRouteLeave(to, from, next) {
+    // console.log('beforeRouteLeave ==>');
+    next();
   }
 }
 </script>
 
-<style>
-
+<style scope>
+.control {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
 </style>

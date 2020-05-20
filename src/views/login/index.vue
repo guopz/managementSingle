@@ -18,6 +18,7 @@
           class="u-ipt"
           v-model="password"
           placeholder="请输入密码"
+          @keyup.enter="handleLogin"
         />
       </p>
       <p>
@@ -68,7 +69,7 @@ export default {
   width: 100%;
   height: 100%;
   background: url("../../assets/bg.jpg") center center no-repeat;
-  background-size: 100%;
+  background-size: 100% 100%;
   .m-login-box {
     position: absolute;
     top: 50%;

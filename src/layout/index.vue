@@ -7,7 +7,11 @@
     <div class="g-menu-right">
       <top-bar />
       <div class="m-main">
-        <router-view></router-view>
+        <tags></tags>
+        <!-- include 设置缓存路由暂未添加 -->
+        <keep-alive :include="[]">
+          <router-view></router-view>
+        </keep-alive>
       </div>
     </div>
   </div>
@@ -17,16 +21,33 @@
 import SiderLogo from "./components/TopBar/logo";
 import SiderBar from "./components/SiderBar";
 import TopBar from "./components/TopBar";
+import Tags from "./components/Tags";
 export default {
   name: "Layout",
   components: {
     SiderBar,
     SiderLogo,
-    TopBar
+    TopBar,
+    Tags
   },
   computed: {
     sideFlag() {
       return this.$store.state.gloabl.sideFlag;
+    }
+  },
+  watch: {
+    $route(to, from) {
+      if (to.name === "sub") {
+        let routeData = this.$router.resolve({
+          path: to.path,
+          query: {
+            name: "Hi",
+            age: 18,
+            phoneNum: 12345678901
+          }
+        });
+        return window.open(routeData.href, "_blank");
+      }
     }
   }
 };
@@ -42,9 +63,9 @@ export default {
     height: 100%;
     background-color: #545c64;
     overflow: hidden;
-    transition: all .3s;
+    transition: all 0.3s;
     &.u-fwidth {
-      width: 60px;;
+      width: 60px;
     }
   }
   .g-menu-right {
@@ -57,6 +78,10 @@ export default {
       background-color: #fff;
       box-sizing: border-box;
     }
+  }
+  .m-box-heaer {
+    margin: 10px;
+    border: 1px solid #000;
   }
 }
 </style>

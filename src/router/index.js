@@ -28,6 +28,12 @@ const constantRouterMap = [
     name: 'control',
     component: control,
     meta: { title: '权限控制', icon: 'el-icon-s-help', auth: 'control-hash' }
+  },
+  {
+    path: '/sub',
+    name: 'sub',
+    component: control,
+    meta: { title: '第二子项', icon: 'el-icon-s-data', auth: 'control-sub' }
   }
 ];
 

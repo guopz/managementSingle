@@ -10,15 +10,18 @@ import '@/utils/auth/permission';
 import inject from './utils/auth/inject';
 import Ye from '@/components';
 import '@/styles/index.scss';
+import '@/directives';
+import eventBus from '@/config/eventBus';
 
 Vue.use(ElementUI, { locale });
 Vue.use(Ye, { locale });
 Vue.config.productionTip = false;
+Vue.prototype.$eventBus = eventBus;
 
 // 权限控制开关
 inject(false);
 
-var vm = new Vue({
+const vm = new Vue({
   router,
   store,
   render: h => h(App),

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-dialog :title="formTitle" :visible.sync="formVisible" width="40%">
+    <el-dialog v-dialogDrag :title="formTitle" :visible.sync="formVisible" width="40%">
       <!-- From Item -->
       <the-form ref="formDialog" :columns="formList" :default-data="formItem" />
       <!-- Button -->

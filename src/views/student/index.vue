@@ -95,7 +95,6 @@ export default {
     },
     handleDeleteUser() {
       let result = this.multipleSelection.map(item => item.name);
-      console.log(result);
       if (result.length > 0)
         this.$message.error("稍后删除 " + result.join("/"));
       else {
