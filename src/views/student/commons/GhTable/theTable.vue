@@ -9,6 +9,7 @@
       height="200"
       style="width: 100%;height: 100%;"
       @selection-change="handleSelectionChange"
+      :default-sort="{prop: 'age', order: 'descending'}"
     >
       <el-table-column type="selection" align="center" width="55"></el-table-column>
       <el-table-column
@@ -18,6 +19,7 @@
         :label="item.name"
         :width="item.width"
         :align="item.align"
+        sortable
       ></el-table-column>
       <el-table-column align="center" label="操作" prop="extra">
         <template slot-scope="scope">

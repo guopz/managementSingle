@@ -127,29 +127,45 @@ export let student = [
     rules: [
       { required: true, message: '请输入地址', trigger: 'blur' }
     ]
+  },
+  {
+    name: '图片上传',
+    prop: 'upload',
+    align: 'left',
+    width: 120,
+    input: {
+      type: "upload"
+    },
+    rules: [
+      { required: true, message: '请选择图片', trigger: 'change' }
+    ]
   }
 ]
 
-export const rules = {
-  name: [
-    { required: true, message: '请输入姓名', trigger: 'blur' }
-  ],
-  sex: [
-    { required: true, message: '请输入性别', trigger: 'change' }
-  ],
-  age: [
-    { required: true, message: '请输入年龄', trigger: 'blur' }
-  ],
-  grade: [
-    { required: true, message: '请输入班级', trigger: 'blur' }
-  ],
-  date: [
-    { required: true, message: '请输入出生日期', trigger: 'blur' }
-  ],
-  major: [
-    { required: true, message: '请填写专业', trigger: 'blur' }
-  ],
-  address: [
-    { required: true, message: '请输入地址', trigger: 'blur' }
-  ]
-}
+export const rules = {};
+// export const rules = {
+//   name: [
+//     { required: true, message: '请输入姓名', trigger: 'blur' }
+//   ],
+//   sex: [
+//     { required: true, message: '请输入性别', trigger: 'change' }
+//   ],
+//   age: [
+//     { required: true, message: '请输入年龄', trigger: 'blur' }
+//   ],
+//   grade: [
+//     { required: true, message: '请输入班级', trigger: 'blur' }
+//   ],
+//   date: [
+//     { required: true, message: '请输入出生日期', trigger: 'blur' }
+//   ],
+//   major: [
+//     { required: true, message: '请填写专业', trigger: 'blur' }
+//   ],
+//   address: [
+//     { required: true, message: '请输入地址', trigger: 'blur' }
+//   ],
+//   address: [
+//     { required: true, message: '请输入地址', trigger: 'blur' }
+//   ]
+// }

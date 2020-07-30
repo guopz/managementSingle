@@ -23,12 +23,22 @@
       @change="handleChange"
     />
 
+    <Item-upload
+      v-else-if="formItem.type==='upload'"
+      v-bind="$attrs"
+      v-on="$listeners"
+      class="u-input"
+      :data-list="item"
+      @change="handleChange"
+    />
+
     <span v-else>未知控件类型</span>
   </el-form-item>
 </template>
 <script>
 import ItemInput from "./FormItem/ItemInput";
 import ItemSelect from "./FormItem/ItemSelect";
+import ItemUpload from "./FormItem/ItemUpload";
 import FormHandler from "./FormHandler";
 
 export default {
@@ -67,7 +77,8 @@ export default {
   },
   components: {
     ItemInput,
-    ItemSelect
+    ItemSelect,
+    ItemUpload
   },
   watch: {
     item(nv) {

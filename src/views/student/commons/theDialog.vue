@@ -44,9 +44,12 @@ export default {
       this.formVisible = true;
       this.formItem = Object.assign({}, row);
       this.formTitle = title;
+      console.log(this, this.$refs.formDialog);
+      this.$refs["formDialog"] && this.$refs["formDialog"].handleCanel();
     },
     handleSave() {
       this.$refs["formDialog"].handleAsyncSubmit().then(res => {
+        return console.log('res ==>', res);
         if (this.newCreate) {
           this._addStudentList(res);
         } else {
@@ -57,7 +60,6 @@ export default {
     },
     handleCancel() {
       this.formVisible = false;
-      this.$refs["formDialog"].handleCanel();
     },
     _addStudentList(res) {
       this.$message.success("新建成功");
