@@ -1,24 +1,31 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-const layout = () => import('@/layout');
-const login = () => import('@/views/login');
-const error = () => import('@/views/error');
-const student = () => import('@/views/student');
-const graphical = () => import('@/views/graphical');
-const control = () => import('@/views/control');
+const layout = () => import(/* webpackChunkName: "student-msg" */ '@/layout');
+const login = () => import(/* webpackChunkName: "student-msg" */ '@/views/login');
+const error = () => import(/* webpackChunkName: "student-msg" */ '@/views/error');
+const student = () => import(/* webpackChunkName: "student-msg" */ '@/views/student');
+const graphical = () => import(/* webpackChunkName: "student-msg" */ '@/views/graphical');
+const control = () => import(/* webpackChunkName: "student-msg" */ '@/views/control');
 
 Vue.use(VueRouter);
 
-const constantRouterMap = [
+let prefix = ''
+
+// 判断是 qiankun 环境则增加路由前缀
+if(window.__POWERED_BY_QIANKUN__){
+  prefix = '/83205271'
+}
+
+export const constantRouterMap = [
   {
-    path: '/student',
+    path: prefix + '/student',
     name: 'student',
     component: student,
     meta: { title: '学员管理', icon: 'el-icon-s-custom', auth: 'student-hash' }
   },
   {
-    path: '/graphical',
+    path: prefix + '/graphical',
     name: 'graphical',
     component: graphical,
     meta: { title: '图形分析', icon: 'el-icon-share', auth: 'graphical-hash' }
@@ -34,10 +41,22 @@ const constantRouterMap = [
     name: 'sub',
     component: control,
     meta: { title: '第二子项', icon: 'el-icon-s-data', auth: 'control-sub' }
+  },
+  {
+    path: '/main/home',
+    name: 'main',
+    meta: { title: '其他系统' }
+  },
+  {
+    path: '/vue/about',
+    name: 'about',
+    meta: { title: 'Sub 其他系统' }
   }
 ];
 
 const Router = new VueRouter({
+  // base: window.__POWERED_BY_QIANKUN__ ? '/new' : process.env.BASE_URL,
+  // mode: 'history',
   scrollBehavior: () => ({
     y: 0
   }),

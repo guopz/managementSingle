@@ -1,23 +1,26 @@
 <template>
-  <div v-if="!item.hidden">
-    <el-menu-item v-if="!item.children || item.children.length == 0" :index="item.path">
+  <div class="main-menu" v-if="!item.hidden" style="width: 200px">
+    <el-menu-item
+      v-if="!item.children || item.children.length == 0"
+      :index="item.path"
+    >
       <span :class="icon(item.meta)" />
-      <span slot="title">{{item.meta.title}}</span>
+      <span slot="title">{{ item.meta.title }} - {{ item.path }}</span>
     </el-menu-item>
 
     <el-submenu v-else :index="item.path">
       <template slot="title">
         <span v-if="icon(item.meta)" :class="icon(item.meta)" />
-        <span slot="title">{{item.meta.title}}11</span>
+        <span slot="title">{{ item.meta.title }}</span>
       </template>
       <template v-for="child in item.children">
         <sidebar-item
-          v-if="child.children&&child.children.length>0"
+          v-if="child.children && child.children.length > 0"
           :item="child"
           :key="child.path"
         />
         <el-menu-item v-else :key="child.path" :index="child.path">
-          <span slot="title">{{child.meta.title}}33</span>
+          <span slot="title">{{ child.meta.title }}</span>
         </el-menu-item>
       </template>
     </el-submenu>
@@ -32,12 +35,12 @@ export default {
   props: {
     item: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
     icon() {
-      return params => {
+      return (params) => {
         let { icon = "", title = "" } = params,
           result =
             icon && icon.length > 0
@@ -47,7 +50,18 @@ export default {
               : "";
         return result;
       };
-    }
-  }
+    },
+  },
 };
 </script>
+
+<style lang="scss" scoped>
+.main-menu {
+  .el-menu-item,
+  .el-submenu__title {
+    height: 45px;
+    line-height: 45px;
+    font-size: 12px;
+  }
+}
+</style>

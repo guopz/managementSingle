@@ -1,11 +1,11 @@
 <template>
-  <div id="app">
+  <div id="app1">
     <router-view></router-view>
   </div>
 </template>
 
 <style>
-#app,
+#app1,
 .wrapper,
 body,
 html {
@@ -18,7 +18,7 @@ html {
   margin: 0;
   box-sizing: border-box;
 }
-#app {
+#app1 {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   /* -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */

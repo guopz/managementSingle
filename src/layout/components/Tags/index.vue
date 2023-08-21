@@ -47,9 +47,12 @@ export default {
         ? this.tagsList[index]
         : this.tagsList[index - 1];
       if (item) {
+        console.log(1);
         delItem.path === this.$route.fullPath && this.$router.push(item.path);
       } else {
-        this.$router.push("/");
+        console.log(this.$route.fullPath);
+        if(this.$route.fullPath != '/student')
+        this.$router.push("/student");
       }
     },
     // 关闭全部标签
@@ -76,7 +79,7 @@ export default {
         this.tagsList.push({
           title: route.meta.title,
           path: route.fullPath,
-          name: route.matched[1].components.default.name
+          name: route.name || '未设置'
         });
       }
       // bus.$emit('tags', this.tagsList);
@@ -126,7 +129,7 @@ export default {
   overflow: hidden;
   background: #fff;
   padding-right: 120px;
-  box-shadow: 0 5px 10px #ddd;
+  box-shadow: 5px 5px 10px #ddd;
 }
 .tags ul {
   box-sizing: border-box;

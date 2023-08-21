@@ -1,17 +1,23 @@
 <template>
-  <div class="contaienr">
-    <div :class="['g-menu-left',!sideFlag?'':'u-fwidth']">
+  <div class="contaienr sub-gather">
+    <div
+      v-if="BY_QIANKUN"
+      :class="['g-menu-left', !sideFlag ? '' : 'u-fwidth']"
+    >
       <sider-logo />
       <sider-bar />
     </div>
     <div class="g-menu-right">
-      <top-bar />
+      <top-bar v-if="BY_QIANKUN" />
       <div class="m-main">
-        <tags></tags>
+        <tags v-if="BY_QIANKUN"></tags>
         <!-- include 设置缓存路由暂未添加 -->
-        <keep-alive :include="[]">
+        <keep-alive :include="['student']">
           <router-view></router-view>
         </keep-alive>
+        <!-- 子应用容器 -->
+        <div id="container11"></div>
+        <div id="container22"></div>
       </div>
     </div>
   </div>
@@ -28,28 +34,32 @@ export default {
     SiderBar,
     SiderLogo,
     TopBar,
-    Tags
+    Tags,
   },
   computed: {
     sideFlag() {
       return this.$store.state.gloabl.sideFlag;
-    }
+    },
+    BY_QIANKUN() {
+      return !window.__POWERED_BY_QIANKUN__;
+    },
   },
   watch: {
     $route(to, from) {
       if (to.name === "sub") {
+        console.log("to.name ==>", to);
         let routeData = this.$router.resolve({
           path: to.path,
           query: {
             name: "Hi",
             age: 18,
-            phoneNum: 12345678901
-          }
+            phoneNum: 12345678901,
+          },
         });
         return window.open(routeData.href, "_blank");
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

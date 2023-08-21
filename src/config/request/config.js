@@ -8,7 +8,7 @@ let BASE;
 let { NODE_ENV } = process.env;
 if (NODE_ENV === "development") {
   USERID = '251297';
-  BASEAD = 'http://rap2.taobao.org:38080';
+  BASEAD = 'http://rap2api.taobao.org';
   BASE = `${BASEAD}/app/mock/${USERID}`;
 }
 else {

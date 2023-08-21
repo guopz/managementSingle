@@ -130,6 +130,7 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 
   .m-header {
     flex: 0 0 auto;
